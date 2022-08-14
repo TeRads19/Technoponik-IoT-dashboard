@@ -91,11 +91,11 @@ function Dashboard() {
         native: true // when using native, your OS will handle theming.
       });
     }
-    else if (nilaisuhu > 30 || nilaiph < 25){
-      var pesan = "PH saat ini = " + nilaisuhu + "\u00b0 C";
+    else if (nilaisuhu > 30 || nilaisuhu < 25){
+      var pesan = "Suhu saat ini = " + nilaisuhu + "\u00b0 C";
       addNotification({
         title: "Warning !",
-        subtitle: "PH Dalam Level Bahaya",
+        subtitle: "Suhu Dalam Level Bahaya",
         message: pesan,
         theme: "red",
         duration: 7000,

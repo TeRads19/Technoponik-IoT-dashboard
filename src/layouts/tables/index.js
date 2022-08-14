@@ -143,7 +143,7 @@ function Tables() {
       var stat = "";
       var warna ="";
 
-      if(arrval > 8 || arrval < 6.9 ){
+      if(arrval > 8 || arrval < 6.5 ){
         stat = "Danger"
         warna = "error"
       }
