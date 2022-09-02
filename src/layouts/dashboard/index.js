@@ -67,6 +67,9 @@ var nilaiaerator;
 
 function Dashboard() {
 
+  const today = new Date();
+  var waktu = today.getDate() + '/' + (today.getUTCMonth()+1) + '/' + today.getFullYear();
+  
   
   const notifMe = () => {
     if (nilaido >= 10 || nilaido < 5){
@@ -213,22 +216,22 @@ function Dashboard() {
     }),
 
     dataDO = buffArr.map((arrVal, index)=> {
-    return (arrVal.data.DO);
+    return (parseFloat(arrVal.data.DO).toFixed(2));
     }),
     
 
     dataSuhu = buffArr.map((arrVal, index) => {
-    return (arrVal.data.Suhu)
+    return (parseFloat(arrVal.data.Suhu).toFixed(2))
     }),
     
 
     dataPH = buffArr.map((arrVal, index)=> {
-      return (arrVal.data.PH)
+      return (parseFloat(arrVal.data.PH).toFixed(2))
     }),
     
 
     dataTDS = buffArr.map((arrVal, index) => {
-      return (arrVal.data.TDS);
+      return (parseFloat(arrVal.data.TDS).toFixed(2));
     }),
     
     nilaiph = dataPH[12], nilaido = dataDO[12], nilaisuhu = dataSuhu[12], nilaitds = dataTDS[12],
@@ -308,6 +311,7 @@ function Dashboard() {
               <ComplexStatisticsCard
                 icon="thermostat"
                 title="Suhu Air"
+                rata2={waktu}
                 count=
                 {
                   nilaisuhu + " \u00b0C"
