@@ -25,7 +25,7 @@ import Icon from "@mui/material/Icon";
 import MDBox from "components/MDBox";
 import MDTypography from "components/MDTypography";
 
-function ComplexStatisticsCard({ color, title, count, rata2, percentage, icon }) {
+function ComplexStatisticsCard({ color, title, count, rata2,maxval,minval, percentage, icon }) {
   return (
     <Card>
       <MDBox display="flex" justifyContent="space-between" pt={1} px={2}>
@@ -55,11 +55,41 @@ function ComplexStatisticsCard({ color, title, count, rata2, percentage, icon })
         </MDBox>
 
       </MDBox>
+
+      <MDBox display="flex" justifyContent="space-between" pt={1} px={2}>
       <MDBox textAlign="left" lineHeight={1} pb={2} px={2}>
-          <MDTypography variant="h6" fontWeight="bold" color="text">
-            {"Rata-rata Harian"}
+          <MDTypography variant="caption" fontWeight="bold" color="text">
+            {"Rata-rata"}
           </MDTypography>
-          <MDTypography variant="h6">{rata2}</MDTypography>
+        </MDBox>
+
+      <MDBox textAlign="left" lineHeight={1} pb={2} px={2}>
+          <MDTypography variant="caption" fontWeight="bold" color="text">
+            {"Max Value"}
+          </MDTypography>
+        </MDBox>
+
+        <MDBox textAlign="left" lineHeight={1} pb={2} px={2}>
+          <MDTypography variant="caption" fontWeight="bold" color="text">
+            {"Min Value"}
+          </MDTypography>
+
+        </MDBox>
+        </MDBox>
+
+        
+      <MDBox display="flex" justifyContent="space-between" pt={0} px={2}>
+      <MDBox textAlign="left" lineHeight={1} pb={2} px={2}>
+          <MDTypography variant="caption">{rata2}</MDTypography>
+        </MDBox>
+
+      <MDBox textAlign="left" lineHeight={1} pb={2} px={2}>
+          <MDTypography variant="caption">{maxval}</MDTypography>
+        </MDBox>
+
+        <MDBox textAlign="left" lineHeight={1} pb={2} px={2}>
+          <MDTypography variant="caption">{minval}</MDTypography>
+        </MDBox>
         </MDBox>
 
       <MDBox pb={2} px={2}>

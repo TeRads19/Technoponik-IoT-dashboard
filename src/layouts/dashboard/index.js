@@ -41,7 +41,7 @@ import React from 'react'
 
 import { useState, useEffect, ReactDOM } from "react";
 import { db } from "sensordata/configfb";
-import { ref, onValue, getDatabase, get, DataSnapshot, limitToFirst, onChildAdded, orderByKey,query, onChildChanged, limitToLast } from "firebase/database";
+import { ref, onValue, getDatabase, get, DataSnapshot, limitToFirst, onChildAdded, orderByKey,query, onChildChanged, limitToLast, equalTo } from "firebase/database";
 import addNotification from "react-push-notification";
 import CandlestickChartIcon from '@mui/icons-material/CandlestickChart';
 //import { PushNotification } from "react-push-notification/dist/notifications/Storage";
@@ -50,6 +50,7 @@ import CandlestickChartIcon from '@mui/icons-material/CandlestickChart';
 const datasource = ref(db, 'Sensordat');
 var que = query(datasource,limitToLast(13));
 
+
 var dataSuhu = [];
 var dataPH = [];
 var dataDO = [];
@@ -57,6 +58,7 @@ var dataTDS = [];
 var dataPump = [];
 var dataAerator = [];
 var dataTime = [];
+
 var nilaiph;
 var nilaisuhu;
 var nilaido;
@@ -67,10 +69,83 @@ var nilaiaerator;
 
 function Dashboard() {
 
+
+
   const today = new Date();
-  var waktu = today.getDate() + '/' + (today.getUTCMonth()+1) + '/' + today.getFullYear();
   
-  
+  var waktu = "0" + today.getDate() + "/" + "0" +(today.getMonth()+1) + "/" + today.getFullYear();
+  var que2 = query(datasource);
+
+
+  var Lavgph = [];
+  var Lavgdo =[];
+  var Lavgtds =[];
+  var Lavgsuhu = [];
+  var bffer = [];
+
+  const [avgph,setavgph] = useState(0);
+  const [avgdo,setavgdo] = useState(0);
+  const [avgtds,setavgtds] = useState(0);
+  const [avgsuhu,setavgsuhu] = useState(0);
+
+
+  const getAvg = arr => {
+    const fsum = (total, currentValue) => total + currentValue
+    const sum = arr.reduce(fsum);
+    return sum / arr.length;
+  }
+
+  const [maxph, setmaxph] = useState(0);
+
+
+  get(que2).then((snapshot) => {
+    const thisbuff = [];
+
+    Object.keys(snapshot.val()).map(key =>{
+    thisbuff.push({
+      id: key,
+      data: snapshot.val()[key]
+    })})
+
+      if (snapshot.exists()) {
+        bffer = thisbuff.filter(arrVal =>
+          arrVal.data.Tanggal === waktu
+        );
+
+        bffer = bffer.map((arrVal, index) => {
+          return (arrVal.data); 
+          });
+        
+          Lavgph = bffer.map((arrVal, index) => {
+            return (arrVal.PH); 
+          });
+          Lavgdo = bffer.map((arrVal, index) => {
+            return (arrVal.DO); 
+          });
+          Lavgtds = bffer.map((arrVal, index) => {
+            return (arrVal.TDS); 
+          });
+          Lavgsuhu = bffer.map((arrVal, index) => {
+            return (arrVal.Suhu); 
+          });
+          setavgph(getAvg(Lavgph));
+          setavgdo(getAvg(Lavgdo));
+          setavgtds(getAvg(Lavgtds));
+          setavgsuhu(getAvg(Lavgsuhu));
+
+          setmaxph(parseFloat(Math.min.apply(maxph,Lavgdo)).toFixed(2));
+        console.log(bffer);
+        console.log(waktu);
+        console.log(avgph);
+        console.log(avgdo);
+        console.log(avgtds);
+        console.log(avgsuhu);
+        console.log(maxph);
+      } else {
+        console.log("No data available");
+      }
+    });
+
   const notifMe = () => {
     if (nilaido >= 10 || nilaido < 5){
       var pesan = 'DO saat ini = ' + nilaido + " PPM";
@@ -311,7 +386,8 @@ function Dashboard() {
               <ComplexStatisticsCard
                 icon="thermostat"
                 title="Suhu Air"
-                rata2={waktu}
+                rata2={avgph}
+                minval={maxph}
                 count=
                 {
                   nilaisuhu + " \u00b0C"
