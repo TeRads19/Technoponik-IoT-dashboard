@@ -41,15 +41,15 @@ import React from 'react'
 
 import { useState, useEffect, ReactDOM } from "react";
 import { db } from "sensordata/configfb";
-import { ref, onValue, getDatabase, get, DataSnapshot, limitToFirst, onChildAdded, orderByKey,query, onChildChanged, limitToLast, equalTo } from "firebase/database";
+import { ref, onValue, getDatabase, get, DataSnapshot, limitToFirst, onChildAdded, orderByKey,query, onChildChanged, limitToLast } from "firebase/database";
 import addNotification from "react-push-notification";
 import CandlestickChartIcon from '@mui/icons-material/CandlestickChart';
+import { Datadog } from "styled-icons/simple-icons";
 //import { PushNotification } from "react-push-notification/dist/notifications/Storage";
 //import { Notifications } from "react-push-notification/dist/notifications/Storage";
 
 const datasource = ref(db, 'Sensordat');
 var que = query(datasource,limitToLast(13));
-
 
 var dataSuhu = [];
 var dataPH = [];
@@ -58,7 +58,6 @@ var dataTDS = [];
 var dataPump = [];
 var dataAerator = [];
 var dataTime = [];
-
 var nilaiph;
 var nilaisuhu;
 var nilaido;
@@ -66,85 +65,100 @@ var nilaitds;
 var nilaipump;
 var nilaiaerator;
 
+var avgdo;
+var mindo;
+var maxdo;
+
 
 function Dashboard() {
-
-
-
+  
+    /*
+    get(que2).then((snapshot) => {
+      const thisbuff = [];
+  
+      Object.keys(snapshot.val()).map(key =>{
+      thisbuff.push({
+        id: key,
+        data: snapshot.val()[key]
+      })})
+  
+        if (snapshot.exists()) {
+          bffer = thisbuff.filter(arrVal =>
+            arrVal.data.Tanggal === waktu
+          );
+  
+          bffer = bffer.map((arrVal, index) => {
+            return (arrVal.data); 
+            });
+          
+            Lavgph = bffer.map((arrVal, index) => {
+              return (arrVal.PH); 
+            });
+            Lavgdo = bffer.map((arrVal, index) => {
+              return (arrVal.DO); 
+            });
+            Lavgtds = bffer.map((arrVal, index) => {
+              return (arrVal.TDS); 
+            });
+            Lavgsuhu = bffer.map((arrVal, index) => {
+              return (arrVal.Suhu); 
+            });
+            setavgph(getAvg(Lavgph).toFixed(2));
+            setavgdo(getAvg(Lavgdo).toFixed(2));
+            setavgtds(getAvg(Lavgtds).toFixed(2));
+            setavgsuhu(getAvg(Lavgsuhu).toFixed(2));
+  
+          setmaxph(parseFloat(Math.max.apply(maxph,Lavgph)).toFixed(2));
+          setminph(parseFloat(Math.min.apply(minph,Lavgph)).toFixed(2));
+          setmaxdo(parseFloat(Math.max.apply(maxdo,Lavgdo)).toFixed(2));
+          setmindo(parseFloat(Math.min.apply(mindo,Lavgdo)).toFixed(2));
+          setmaxtds(parseFloat(Math.max.apply(maxtds,Lavgtds)).toFixed(2));
+          setmintds(parseFloat(Math.min.apply(mintds,Lavgdo)).toFixed(2));
+          setmaxsuhu(parseFloat(Math.max.apply(maxsuhu,Lavgsuhu)).toFixed(2));
+          setminsuhu(parseFloat(Math.min.apply(minsuhu,Lavgsuhu)).toFixed(2));
+          console.log(maxph);
+        } else {
+          console.log("No data available");
+        }
+      });
+      */
+  
   const today = new Date();
   
-  var waktu = "0" + today.getDate() + "/" + "0" +(today.getMonth()+1) + "/" + today.getFullYear();
+  var waktu = "0" + (today.getDate()-1) + "/" + "0" +(today.getMonth()+1) + "/" + today.getFullYear();
   var que2 = query(datasource);
 
 
-  var Lavgph = [];
-  var Lavgdo =[];
-  var Lavgtds =[];
-  var Lavgsuhu = [];
-  var bffer = [];
-
+/*
   const [avgph,setavgph] = useState(0);
   const [avgdo,setavgdo] = useState(0);
   const [avgtds,setavgtds] = useState(0);
   const [avgsuhu,setavgsuhu] = useState(0);
 
+  const [maxph, setmaxph] = useState(0);
+  const [minph, setminph] = useState(0);
+  const [maxtds, setmaxtds] = useState(0);
+  const [mintds, setmintds] = useState(0);
+  const [maxdo, setmaxdo] = useState(0);
+  const [mindo, setmindo] = useState(0);
+  const [maxsuhu, setmaxsuhu] = useState(0);
+  const [minsuhu, setminsuhu] = useState(0);
+  const [minpump, setminpump] = useState(0);
+  const [maxpump, setmaxpump] = useState(0);
+  const [maxaer, setmaxaer] = useState(0);
+  const [minaer, setminaer] = useState(0);
+*/
+
 
   const getAvg = arr => {
     const fsum = (total, currentValue) => total + currentValue
     const sum = arr.reduce(fsum);
-    return sum / arr.length;
+    return (sum / arr.length);
   }
 
-  const [maxph, setmaxph] = useState(0);
 
 
-  get(que2).then((snapshot) => {
-    const thisbuff = [];
 
-    Object.keys(snapshot.val()).map(key =>{
-    thisbuff.push({
-      id: key,
-      data: snapshot.val()[key]
-    })})
-
-      if (snapshot.exists()) {
-        bffer = thisbuff.filter(arrVal =>
-          arrVal.data.Tanggal === waktu
-        );
-
-        bffer = bffer.map((arrVal, index) => {
-          return (arrVal.data); 
-          });
-        
-          Lavgph = bffer.map((arrVal, index) => {
-            return (arrVal.PH); 
-          });
-          Lavgdo = bffer.map((arrVal, index) => {
-            return (arrVal.DO); 
-          });
-          Lavgtds = bffer.map((arrVal, index) => {
-            return (arrVal.TDS); 
-          });
-          Lavgsuhu = bffer.map((arrVal, index) => {
-            return (arrVal.Suhu); 
-          });
-          setavgph(getAvg(Lavgph));
-          setavgdo(getAvg(Lavgdo));
-          setavgtds(getAvg(Lavgtds));
-          setavgsuhu(getAvg(Lavgsuhu));
-
-          setmaxph(parseFloat(Math.min.apply(maxph,Lavgdo)).toFixed(2));
-        console.log(bffer);
-        console.log(waktu);
-        console.log(avgph);
-        console.log(avgdo);
-        console.log(avgtds);
-        console.log(avgsuhu);
-        console.log(maxph);
-      } else {
-        console.log("No data available");
-      }
-    });
 
   const notifMe = () => {
     if (nilaido >= 10 || nilaido < 5){
@@ -180,6 +194,7 @@ function Dashboard() {
         native: true // when using native, your OS will handle theming.
       });
     }
+
     else if (nilaitds > 800){
       var pesan = 'TDS saat ini = ' + nilaitds;
       addNotification({
@@ -207,6 +222,7 @@ function Dashboard() {
   const [coloraer,setColoraer] = useState("");
   const [statpump,setStatpump]= useState("");
   const [colorpump,setColorpump] = useState("");
+
 
   const insertstatus = async () => {
     if(nilaido < 12 && nilaido > 5 && nilaido>0)
@@ -271,14 +287,15 @@ function Dashboard() {
       setStatpump([buffpump,"%"]);
       setColorpump("success");
     }
-
-
   }
+
   useEffect (() => {
 
     notifMe();
-    onValue(que,(snapshot) =>
+    onValue(que2,(snapshot) =>
   {
+  var thisbuff =[];
+  var chk = ["0",];
   const buffArr = []; 
   Object.keys(snapshot.val()).map(key =>{
   buffArr.push({
@@ -289,47 +306,71 @@ function Dashboard() {
   setUsers(buffArr.map((arrVal, index) => {
     return (arrVal.data); 
     }),
+    thisbuff = buffArr.filter(arrVal =>
+      arrVal.data.Tanggal === waktu
+    ),
 
-    dataDO = buffArr.map((arrVal, index)=> {
-    return (parseFloat(arrVal.data.DO).toFixed(2));
+    
+    dataDO = thisbuff.map((arrVal, index)=> {
+    return (parseFloat((arrVal.data.DO).toFixed(2)));
     }),
+    console.log(dataDO),
+    avgdo = parseFloat(getAvg(dataDO).toFixed(2)),
+    console.log(avgdo),
+    mindo = Math.min.apply(null,dataDO),
+    dataDO = dataDO.slice((thisbuff.length - 13), thisbuff.length),
+    /*
+    console.log("ini data DO"),
+    console.log(dataDO), */
+
+    dataSuhu = thisbuff.map((arrVal, index)=> {
+      return (arrVal.data.Suhu);
+      }),
+    dataSuhu = dataSuhu.slice((thisbuff.length - 13), thisbuff.length),
+
+    dataPH = thisbuff.map((arrVal, index)=> {
+      return (arrVal.data.PH);
+      }),
+    dataPH = dataPH.slice((thisbuff.length - 13), thisbuff.length),
+
     
 
-    dataSuhu = buffArr.map((arrVal, index) => {
-    return (parseFloat(arrVal.data.Suhu).toFixed(2))
-    }),
-    
+    dataTDS = thisbuff.map((arrVal, index)=> {
+      return (arrVal.data.TDS);
+      }),
+    dataTDS = dataTDS.slice((thisbuff.length - 13), thisbuff.length),
 
-    dataPH = buffArr.map((arrVal, index)=> {
-      return (parseFloat(arrVal.data.PH).toFixed(2))
-    }),
-    
-
-    dataTDS = buffArr.map((arrVal, index) => {
-      return (parseFloat(arrVal.data.TDS).toFixed(2));
-    }),
-    
     nilaiph = dataPH[12], nilaido = dataDO[12], nilaisuhu = dataSuhu[12], nilaitds = dataTDS[12],
     
-    dataPump = buffArr.map((arrVal, index) => {
-      return (arrVal.data.Pump);
-    }),
-    nilaipump=dataPump[12],
 
-    dataAerator = buffArr.map((arrVal, index) => {
-      return (arrVal.data.Aerator);
-    }),
+    dataPump = thisbuff.map((arrVal, index)=> {
+      return (arrVal.data.Pump);
+      }),
+      dataPump = dataPump.slice((thisbuff.length - 13), thisbuff.length),
+    
+      nilaipump=dataPump[12],
+
+      dataAerator = thisbuff.map((arrVal, index)=> {
+        return (arrVal.data.Aerator);
+        }),
+        dataAerator = dataAerator.slice((thisbuff.length - 13), thisbuff.length),
+      
     nilaiaerator=dataAerator[12],
     
-    dataTime = buffArr.map((arrVal, index) => {
+    dataTime = thisbuff.map((arrVal, index)=> {
       return (arrVal.data.Time);
     }),
+    dataTime = dataTime.slice((thisbuff.length - 13), thisbuff.length),
+      
+
+
+
     insertstatus(),
     inseroutput()
     )
     
   });
-  },[nilaiph, nilaido, nilaisuhu, nilaitds]);
+  },[nilaiph, nilaido, nilaisuhu, nilaitds,avgdo]);
 
   return (
     <DashboardLayout>               
@@ -365,11 +406,14 @@ function Dashboard() {
                 color="dark"
                 icon="opacity"
                 title="Oksigen Terlarut"
+                rata2 = {avgdo}
+                maxval = {maxdo}
+                minval = {mindo}
                 count=
                 {
-                  <>
-                  {nilaido} <strong>PPM</strong>
-                  </>
+                  
+                  String(nilaido) + " PPM"
+                  
                 }
                 percentage={{
                   color: colordo,
@@ -386,8 +430,6 @@ function Dashboard() {
               <ComplexStatisticsCard
                 icon="thermostat"
                 title="Suhu Air"
-                rata2={avgph}
-                minval={maxph}
                 count=
                 {
                   nilaisuhu + " \u00b0C"
