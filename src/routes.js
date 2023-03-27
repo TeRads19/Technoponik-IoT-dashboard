@@ -36,7 +36,7 @@ Coded by www.creative-tim.com
 */
 
 // Material Dashboard 2 React layouts
-import Dashboard from "layouts/dashboard";
+import Dasbor from "layouts/dasbor";
 import Tables from "layouts/tables";
 import Notifications from "layouts/notifications";
 import Profile from "layouts/profile";
@@ -49,11 +49,11 @@ import Icon from "@mui/material/Icon";
 const routes = [
   {
     type: "collapse",
-    name: "Dashboard",
-    key: "dashboard",
+    name: "Dasbor",
+    key: "dasbor",
     icon: <Icon fontSize="small">dashboard</Icon>,
-    route: "/dashboard",
-    component: <Dashboard />,
+    route: "/dasbor",
+    component: <Dasbor />,
   },
   {
     type: "collapse",
@@ -76,9 +76,9 @@ const routes = [
   
   {
     type: "collapse",
-    name: "Profile",
+    name: "Summary",
     key: "profile",
-    icon: <Icon fontSize="small">person</Icon>,
+    icon: <Icon fontSize="small">summarize</Icon>,
     route: "/profile",
     component: <Profile />,
   },

@@ -31,12 +31,10 @@ import ComplexStatisticsCard from "examples/Cards/StatisticsCards/ComplexStatist
 // @mui material components
 import Icon from "@mui/material/Icon";
 // Data
-import reportsBarChartData from "layouts/dashboard/data/reportsBarChartData";
-import reportsLineChartData from "layouts/dashboard/data/reportsLineChartData";
+
 
 // Dashboard components
-import Projects from "layouts/dashboard/components/Projects";
-import OrdersOverview from "layouts/dashboard/components/OrdersOverview";
+
 import React from 'react'
 
 import { useState, useEffect, ReactDOM } from "react";
@@ -48,8 +46,36 @@ import { Datadog } from "styled-icons/simple-icons";
 //import { PushNotification } from "react-push-notification/dist/notifications/Storage";
 //import { Notifications } from "react-push-notification/dist/notifications/Storage";
 
-const datasource = ref(db, 'Sensordat');
-var que = query(datasource,limitToLast(13));
+
+//fungsi string tanggal kebutuhan deploy live
+  /*
+  const today = new Date();
+  if(today.getDate() < 10 && today.getMonth()< 10)
+  {
+   var hari = "0" + today.getDate() + "/" + "0" + (today.getMonth()+1) + "/" + today.getFullYear();
+   var pathari = today.getDate() + "-" + "0" + (today.getMonth()+1) + "-" + today.getFullYear();
+  }
+  else if(today.getDate() >= 10 && today.getMonth() >= 10)
+  {
+    var hari = today.getDate() + "/" + (today.getMonth()+1) + "/" + today.getFullYear();
+    var pathari = today.getDate() + "-" + (today.getMonth()+1) + "-" + today.getFullYear();
+    //console.log(hari);
+  }
+  else if(today.getDate() < 10 && today.getMonth() >= 10)
+  {
+    var hari = "0" + today.getDate() + "/" + (today.getMonth()+1) + "/" + today.getFullYear();
+    var pathari = "0" + today.getDate() + "-" + (today.getMonth()+1) + "-" + today.getFullYear();
+  }
+  // var path = "Sensordat/" + bulan + "/" + 
+  */
+  
+  
+//set tanggal untuk demo (manual)
+  var hari = "24/09/2022";
+  var path = "Sensordat/09-2022/24-09-2022"
+
+const datasource = ref(db, path);
+var que = query(datasource, limitToLast(1000));
 
 var dataSuhu = [];
 var dataPH = [];
@@ -69,8 +95,27 @@ var avgdo;
 var mindo;
 var maxdo;
 
+var avgph;
+var minph;
+var maxph;
 
-function Dashboard() {
+var avgtds;
+var mintds;
+var maxtds;
+
+var avgsuhu;
+var minsuhu;
+var maxsuhu;
+
+var avgpump;
+var minpump;
+var maxpump;
+
+var avgaer;
+var minaer;
+var maxaer;
+
+function Dasbor() {
   
     /*
     get(que2).then((snapshot) => {
@@ -84,7 +129,7 @@ function Dashboard() {
   
         if (snapshot.exists()) {
           bffer = thisbuff.filter(arrVal =>
-            arrVal.data.Tanggal === waktu
+            arrVal.data.Tanggal === hari
           );
   
           bffer = bffer.map((arrVal, index) => {
@@ -122,12 +167,7 @@ function Dashboard() {
         }
       });
       */
-  
-  const today = new Date();
-  
-  var waktu = "0" + (today.getDate()-1) + "/" + "0" +(today.getMonth()+1) + "/" + today.getFullYear();
-  var que2 = query(datasource);
-
+     
 
 /*
   const [avgph,setavgph] = useState(0);
@@ -161,36 +201,36 @@ function Dashboard() {
 
 
   const notifMe = () => {
-    if (nilaido >= 10 || nilaido < 5){
+    if (nilaido < 3){
       var pesan = 'DO saat ini = ' + nilaido + " PPM";
       addNotification({
         title: "Warning !",
         subtitle: "DO Dalam Level Bahaya",
         message: pesan,
         theme: "red",
-        duration: 7000,
+        duration: 5000,
         native: true // when using native, your OS will handle theming.
       });
     }
-    else if (nilaiph > 8 || nilaiph < 6.5){
+    else if (nilaiph > 10 || nilaiph < 3){
       var pesan = 'PH saat ini = ' + nilaiph;
       addNotification({
         title: "Warning !",
         subtitle: "PH Dalam Level Bahaya",
         message: pesan,
         theme: "red",
-        duration: 7000,
+        duration: 5000,
         native: true // when using native, your OS will handle theming.
       });
     }
-    else if (nilaisuhu > 30 || nilaisuhu < 25){
+    else if (nilaisuhu > 35 || nilaisuhu < 25){
       var pesan = "Suhu saat ini = " + nilaisuhu + "\u00b0 C";
       addNotification({
         title: "Warning !",
         subtitle: "Suhu Dalam Level Bahaya",
         message: pesan,
         theme: "red",
-        duration: 7000,
+        duration: 5000,
         native: true // when using native, your OS will handle theming.
       });
     }
@@ -225,47 +265,79 @@ function Dashboard() {
 
 
   const insertstatus = async () => {
-    if(nilaido < 12 && nilaido > 5 && nilaido>0)
+    if(nilaido >= 5)
     {
       setStatdo("AMAN");
       setColordo("success");
     }
-    if(nilaido <= 5 || nilaido >= 12)
+    if(nilaido < 5 && nilaido >=3)
+    {
+      setStatdo("WARNING");
+      setColordo("warning");
+    }
+    if(nilaido < 3)
     {
       setStatdo("DANGER");
       setColordo("error");
     }
-    if(nilaiph < 8.5 && nilaiph > 6)
+    if(nilaiph <= 10  && nilaiph >= 6.5)
     {
       setStatph("AMAN");
       setColorph("success");
     }
-    if(nilaiph <= 6 || nilaiph >= 8.5)
+    if(nilaiph < 6.5  && nilaiph >= 4)
+    {
+      setStatph("WARNING");
+      setColorph("warning");
+    }
+    if(nilaiph < 4 || nilaiph > 10)
     {
       setStatph("DANGER");
       setColorph("error");
     }
-    if(nilaitds < 750)
+    if(nilaitds <= 500)
     {
       setStattds("AMAN");
       setColortds("success");
     }
-    if(nilaitds>=750)
+    if(nilaitds > 500 && nilaitds < 800)
+    {
+      setStattds("WARNING");
+      setColortds("warning");
+    }
+    if(nilaitds >=800)
     {
       setStattds("DANGER");
       setColortds("error");
     }
-    if(nilaisuhu < 30 && nilaisuhu > 20)
+    if(nilaisuhu < 30 && nilaisuhu > 25)
     {
       setStatsuhu("AMAN");
       setColorsuhu("success");
     }
-    if(nilaisuhu <= 20 || nilaisuhu >= 30)
+    if((nilaisuhu <= 25 && nilaisuhu > 20) || (nilaisuhu >= 30 && nilaisuhu < 35))
+    {
+      setStatsuhu("WARNING");
+      setColorsuhu("warning");
+    }
+    if(nilaisuhu <= 20 || nilaisuhu >= 35)
     {
       setStatsuhu("DANGER");
       setColorsuhu("error");
     }
   }
+/*
+  const inserttds = async () => {}
+  const insertph = async () => {}
+  const insertsuhu = async () => {
+
+    dataSuhu = dataSuhu.slice((thisbuff.length - 13), thisbuff.length);
+  }
+  const insertdo = async () => {}
+  const insertpump = async () => {}
+  const insertaer = async () => {}
+*/
+
   const inseroutput = async () => {
     var buffaer = dataAerator[12]-dataAerator[11];
     var buffpump = dataPump[12]-dataPump[11];
@@ -292,10 +364,10 @@ function Dashboard() {
   useEffect (() => {
 
     notifMe();
-    onValue(que2,(snapshot) =>
+    onValue(que,(snapshot) =>
   {
   var thisbuff =[];
-  var chk = ["0",];
+  var chk = ["0"];
   const buffArr = []; 
   Object.keys(snapshot.val()).map(key =>{
   buffArr.push({
@@ -307,37 +379,49 @@ function Dashboard() {
     return (arrVal.data); 
     }),
     thisbuff = buffArr.filter(arrVal =>
-      arrVal.data.Tanggal === waktu
-    ),
+      arrVal.data.Tanggal === hari
+    ), 
+    
+    //console.log(hari),
 
     
     dataDO = thisbuff.map((arrVal, index)=> {
     return (parseFloat((arrVal.data.DO).toFixed(2)));
     }),
-    console.log(dataDO),
+
     avgdo = parseFloat(getAvg(dataDO).toFixed(2)),
-    console.log(avgdo),
     mindo = Math.min.apply(null,dataDO),
+    maxdo = Math.max.apply(null, dataDO),
     dataDO = dataDO.slice((thisbuff.length - 13), thisbuff.length),
     /*
     console.log("ini data DO"),
     console.log(dataDO), */
 
     dataSuhu = thisbuff.map((arrVal, index)=> {
-      return (arrVal.data.Suhu);
+      return (parseFloat((arrVal.data.Suhu).toFixed(2)));
       }),
+    avgsuhu = getAvg(dataSuhu).toFixed(2),
+    minsuhu = Math.min.apply(null, dataSuhu),
+    maxsuhu = Math.max.apply(null, dataSuhu),
+    
     dataSuhu = dataSuhu.slice((thisbuff.length - 13), thisbuff.length),
 
     dataPH = thisbuff.map((arrVal, index)=> {
-      return (arrVal.data.PH);
+      return (parseFloat((arrVal.data.PH).toFixed(2)));
       }),
+    avgph = getAvg(dataPH).toFixed(2),
+    minph = Math.min.apply(null, dataPH),
+    maxph = Math.max.apply(null, dataPH),
     dataPH = dataPH.slice((thisbuff.length - 13), thisbuff.length),
 
     
 
     dataTDS = thisbuff.map((arrVal, index)=> {
-      return (arrVal.data.TDS);
+      return (parseFloat((arrVal.data.TDS).toFixed(2)));
       }),
+    avgtds = getAvg(dataTDS).toFixed(2),
+    mintds = Math.min.apply(null, dataTDS),
+    maxtds = Math.max.apply(null, dataTDS),
     dataTDS = dataTDS.slice((thisbuff.length - 13), thisbuff.length),
 
     nilaiph = dataPH[12], nilaido = dataDO[12], nilaisuhu = dataSuhu[12], nilaitds = dataTDS[12],
@@ -346,6 +430,9 @@ function Dashboard() {
     dataPump = thisbuff.map((arrVal, index)=> {
       return (arrVal.data.Pump);
       }),
+      avgpump = parseInt(Math.round(getAvg(dataPump))),
+      maxpump = Math.max.apply(null, dataPump),
+      minpump = Math.min.apply(null, dataPump),
       dataPump = dataPump.slice((thisbuff.length - 13), thisbuff.length),
     
       nilaipump=dataPump[12],
@@ -353,6 +440,9 @@ function Dashboard() {
       dataAerator = thisbuff.map((arrVal, index)=> {
         return (arrVal.data.Aerator);
         }),
+        avgaer = parseInt(Math.round(getAvg(dataAerator))),
+        maxaer = Math.max.apply(null, dataAerator),
+        minaer = Math.min.apply(null, dataAerator),
         dataAerator = dataAerator.slice((thisbuff.length - 13), thisbuff.length),
       
     nilaiaerator=dataAerator[12],
@@ -368,7 +458,8 @@ function Dashboard() {
     insertstatus(),
     inseroutput()
     )
-    
+    console.log(snapshot.val());
+    console.log(buffArr);
   });
   },[nilaiph, nilaido, nilaisuhu, nilaitds,avgdo]);
 
@@ -385,6 +476,9 @@ function Dashboard() {
                 color="dark"
                 icon="hive"
                 title="pH Kolam"
+                rata2={avgph}
+                maxval={maxph}
+                minval={minph}
                 count=
                 {
                   <>
@@ -430,9 +524,12 @@ function Dashboard() {
               <ComplexStatisticsCard
                 icon="thermostat"
                 title="Suhu Air"
+                rata2 = {avgsuhu}
+                maxval = {maxsuhu}
+                minval = {minsuhu}
                 count=
                 {
-                  nilaisuhu + " \u00b0C"
+                  String(nilaisuhu) + " \u00b0C"
                 }
                 percentage={{
                   color: [colorsuhu],
@@ -449,9 +546,13 @@ function Dashboard() {
                 color="success"
                 icon="grain"
                 title="Total Dissolved Solid"
+                
+                rata2= {avgtds}
+                maxval={maxtds}
+                minval={mintds}
                 count=
                 {
-                  nilaitds + " PPM"
+                  String(nilaitds) + " PPM"
                   
                 }
                 percentage={{
@@ -468,7 +569,10 @@ function Dashboard() {
               <ComplexStatisticsCard
                 color="primary"
                 icon="opacity"
-                title="Aerator Speed"
+                title="Duty Cycle Aerator"
+                rata2 = {avgaer}
+                maxval = {maxaer}
+                minval = {maxaer}
                 count=
                 {
                   <>
@@ -478,7 +582,7 @@ function Dashboard() {
                 percentage={{
                   color: coloraer,
                   amount: stataer,
-                  label: "On Speed",
+                  label: "Perubahan",
                 }}
               />
             </MDBox>
@@ -489,17 +593,20 @@ function Dashboard() {
               <ComplexStatisticsCard
                 color="primary"
                 icon="person_add"
-                title="Pump Speed"
+                title="Duty Cycle Pompa"
+                rata2 = {avgpump}
+                maxval = {maxpump}
+                minval = {minpump}
                 count=
                 {
-                  <>
-                  {nilaipump} <strong>%</strong>
-                  </>
+                  
+                  String(nilaipump) + " %"
+                  
                 }
                 percentage={{
                   color: colorpump,
                   amount: statpump,
-                  label: "On Speed",
+                  label: "Perubahan",
                 }}
               />
             </MDBox>
@@ -580,7 +687,7 @@ function Dashboard() {
                   title=
                   {
                     <>
-                    Data Total Dissolved Solid (<strong>PPM</strong>) 
+                    Data Total Padatan Larut (<strong>PPM</strong>) 
                     </>
                   }
 
@@ -592,7 +699,7 @@ function Dashboard() {
                   }
                   date="Data dikirim setiap 5 menit"
                   chart={{labels: dataTime,
-                  datasets: { label: "Total Dissolved Solid", data: dataTDS},}}
+                  datasets: { label: "Total Padatan Larut", data: dataTDS},}}
                 />
               </MDBox>
             </Grid>
@@ -610,7 +717,7 @@ function Dashboard() {
                   }
                   date="Data dikirim setiap 5 menit"
                   chart={{labels: dataTime,
-                  datasets: { label: "Pump Speed", data: dataPump},}}
+                  datasets: { label: "Duty Cycle Pompa", data: dataPump},}}
 
                 />
               </MDBox>
@@ -629,7 +736,7 @@ function Dashboard() {
                   }
                   date="Data dikirim setiap 5 menit"
                   chart={{labels: dataTime,
-                  datasets: { label: "Aerator Speed", data: dataAerator},}}
+                  datasets: { label: "Duty Cycle Aerator", data: dataAerator},}}
 
                 />
               </MDBox>
@@ -644,4 +751,4 @@ function Dashboard() {
   );
 }
 
-export default Dashboard;
+export default Dasbor;

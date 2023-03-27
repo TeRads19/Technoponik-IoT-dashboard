@@ -224,7 +224,7 @@ function Configurator() {
               color="dark"
               variant="gradient"
               onClick={handleDarkSidenav}
-              disabled={disabled}
+              disabled={false}
               fullWidth
               sx={
                 !transparentSidenav && !whiteSidenav
@@ -239,7 +239,7 @@ function Configurator() {
                 color="dark"
                 variant="gradient"
                 onClick={handleTransparentSidenav}
-                disabled={disabled}
+                disabled={false}
                 fullWidth
                 sx={
                   transparentSidenav && !whiteSidenav
@@ -254,7 +254,7 @@ function Configurator() {
               color="dark"
               variant="gradient"
               onClick={handleWhiteSidenav}
-              disabled={disabled}
+              disabled={false}
               fullWidth
               sx={
                 whiteSidenav && !transparentSidenav
