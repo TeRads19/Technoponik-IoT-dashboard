@@ -13,12 +13,8 @@ Dasbor ini, merupakan bagian dari project ilmiah tugas akhir pribadi yang sudah 
 
 Silahkan 
 
-
-**Example Pages**
-
-If you want to get inspiration or just show something directly to your clients, you can jump-start your development with our pre-built example pages. You will be able to quickly set up the basic structure for your web project.
-
-View [example pages here](https://demos.creative-tim.com/material-dashboard-react/#/dashboard).
+Berikut adalah tampilan dari dashboard IoT Technoponik
+![Image](https://drive.google.com/file/d/1mMVa8zDyjzyA-RP0FeLBaGFyblFXNmOj/view?usp=sharing).
 
 **HELPFUL LINKS**
 
@@ -35,8 +31,11 @@ During the development of this dashboard, we have used many existing resources f
 
 Let us know your thoughts below. And good luck with development!
 
-## Table of Contents
+## Menu IoT Dashboard
 
+*[Dasbor](https://aquaponic-syst.web.app/dasbor)
+*[Tabel](https://aquaponic-syst.web.app/tables)
+*[Profile](https://aquaponic-syst.web.app/profile)
 
 
 ## Versions
@@ -46,6 +45,7 @@ This version of my Is 1.0.0 (mean you could add and improve this by [email me](t
 ## Licensing
 
 - Copyright Template by Creative Tim MIT 2021 [Creative Tim](https://www.creative-tim.com?ref=readme-mdr).
+- Copyright of Data is mine, you can use it for free under CC BY-SA License.
 
 
 ## Useful Links
@@ -56,16 +56,10 @@ This version of my Is 1.0.0 (mean you could add and improve this by [email me](t
 
 - [Freebies](https://www.creative-tim.com/bootstrap-themes/free?ref=readme-mdr) from Creative Tim
 
-- [Affiliate Program](https://www.creative-tim.com/affiliates/new?ref=readme-mdr) (earn money)
-
 ##### Social Media
 
 LinkedIN: <https://www.linkedin.com/in/tedyanggi/>
 
-Twitter: <https://twitter.com/CreativeTim>
+Facebook: <https://www.facebook.com/teddy.anggi>
 
-Facebook: <https://www.facebook.com/CreativeTim>
-
-Google+: <https://plus.google.com/+CreativetimPage>
-
-Instagram: <https://instagram.com/creativetimofficial>
+Instagram: <https://www.instagram.com/ted.sky19>
