@@ -4,7 +4,7 @@
 
 This ioT Dashboard using template developed by creative-tim, the resource of Material Dashboard using React as framework for development. For detailed explanation and documentation regarding the template you can use the [documentation here](https://www.creative-tim.com/learning-lab/react/overview/material-dashboard/).
 
-Dashboard berisikan 3 halaman utama :
+Dashboard Consist of 3 main parts:
 * Dasbor
 * Tables
 * Manual Override
@@ -43,7 +43,7 @@ This version of my Is 1.0.0 (mean you could add and improve this by [email me](t
 
 ## Useful Links
 
-- [My Aquaponic Control Projects](https://www.creative-tim.com/templates?ref=readme-mdr)
+- [My Aquaponic Control Projects](https://github.com/TeRads19/Aquaponics_Control)
 
 - [Tutorials](https://www.youtube.com/channel/UCVyTG4sCw-rOvB9oHkzZD1w)
 
