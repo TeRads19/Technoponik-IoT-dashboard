@@ -2,24 +2,19 @@
 
 ![Image](https://s3.amazonaws.com/creativetim_bucket/products/71/original/material-dashboard-react.jpg?1638950990)
 
-Ini IoT Dashboard yang dibuat berdasarkan template Material Dashboard React 2.0 oleh MIT dengan CC licenses. Untuk mengetahui lebih lanjut dapat melihat [documentation here](https://www.creative-tim.com/learning-lab/react/overview/material-dashboard/).
+This ioT Dashboard using template developed by creative-tim, the resource of Material Dashboard using React as framework for development. For detailed explanation and documentation regarding the template you can use the [documentation here](https://www.creative-tim.com/learning-lab/react/overview/material-dashboard/).
 
 Dashboard berisikan 3 halaman utama :
 * Dasbor
 * Tables
 * Manual Override
 
-Dasbor ini, merupakan bagian dari project ilmiah tugas akhir pribadi yang sudah dipublikasikan pada [Link Publikasi]().  
+This dashboard is part of my Bachelor Degree Final Project that have been publicized on [ICENIS 2023 International Conference]().  
 
 Silahkan 
 
 Berikut adalah tampilan dari dashboard IoT Technoponik
 [Image](https://drive.google.com/file/d/1mMVa8zDyjzyA-RP0FeLBaGFyblFXNmOj/view?usp=sharing).
-
-**HELPFUL LINKS**
-
-- View [Github Repository](https://github.com/creativetimofficial/material-dashboard-react)
-- Check [FAQ Page](https://www.creative-tim.com/faq)
 
 #### Special thanks
 
@@ -50,11 +45,11 @@ This version of my Is 1.0.0 (mean you could add and improve this by [email me](t
 
 ## Useful Links
 
-- [My Aquaponic Control Projects](https://www.creative-tim.com/templates?ref=readme-mdr) from Creative Tim
+- [My Aquaponic Control Projects](https://www.creative-tim.com/templates?ref=readme-mdr)
 
 - [Tutorials](https://www.youtube.com/channel/UCVyTG4sCw-rOvB9oHkzZD1w)
 
-- [Freebies](https://www.creative-tim.com/bootstrap-themes/free?ref=readme-mdr) from Creative Tim
+- [Freebies](https://www.creative-tim.com/bootstrap-themes/free?ref=readme-mdr)
 
 ##### Social Media
 
