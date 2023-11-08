@@ -11,9 +11,7 @@ Dashboard berisikan 3 halaman utama :
 
 This dashboard is part of my Bachelor Degree Final Project that have been publicized on [ICENIS 2023 International Conference]().  
 
-Silahkan 
-
-Berikut adalah tampilan dari dashboard IoT Technoponik
+For image preview on IoT dashboard you could klick the link
 [Image](https://drive.google.com/file/d/1mMVa8zDyjzyA-RP0FeLBaGFyblFXNmOj/view?usp=sharing).
 
 #### Special thanks
