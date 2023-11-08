@@ -14,7 +14,7 @@ Dasbor ini, merupakan bagian dari project ilmiah tugas akhir pribadi yang sudah 
 Silahkan 
 
 Berikut adalah tampilan dari dashboard IoT Technoponik
-![Image](https://drive.google.com/file/d/1mMVa8zDyjzyA-RP0FeLBaGFyblFXNmOj/view?usp=sharing).
+[Image](https://drive.google.com/file/d/1mMVa8zDyjzyA-RP0FeLBaGFyblFXNmOj/view?usp=sharing).
 
 **HELPFUL LINKS**
 
