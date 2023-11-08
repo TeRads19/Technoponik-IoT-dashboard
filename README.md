@@ -11,8 +11,8 @@ Dashboard Consist of 3 main parts:
 
 This dashboard is part of my Bachelor Degree Final Project that have been publicized on [ICENIS 2023 International Conference]().  
 
-For image preview on IoT dashboard you could klick the link
-[Image](https://drive.google.com/file/d/1mMVa8zDyjzyA-RP0FeLBaGFyblFXNmOj/view?usp=sharing).
+Here is the preview of the Dashboard IoT
+![Image](https://drive.google.com/uc?id=1mMVa8zDyjzyA-RP0FeLBaGFyblFXNmOj).
 
 #### Special thanks
 
